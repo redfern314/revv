@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , synon = require('./routes/synon')
   , http = require('http')
   , mongoose= require('mongoose')
   , path = require('path');
@@ -33,6 +34,7 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/synon/:text',synon.getSyns)
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
