@@ -30,4 +30,15 @@ exports.populate = function(req, res){
     res.send("Database population complete")
 }
 
-exports.Word = Word;
+exports.Word=Word;
+
+
+var userSchema=mongoose.Schema({
+	name: String,
+	pass: String,
+	wordScore: Number
+});
+
+var User = mongoose.model('User',userSchema);
+
+exports.User=User;
