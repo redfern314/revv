@@ -9,7 +9,8 @@ var express = require('express')
   , synon = require('./routes/synon')
   , http = require('http')
   , mongoose= require('mongoose')
-  , path = require('path');
+  , path = require('path')
+  , wordDB = require('./models');
 
 var app = express();
 
@@ -24,7 +25,7 @@ app.configure(function(){
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
   app.use(app.router);
-  mongoose.connect(process.env.MONGOLAB_URI || 'localhost');
+  mongoose.connect(process.env.MONGOLAB_URI || 'localhost/words');
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
@@ -35,6 +36,7 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/synon/:text',synon.getSyns)
+app.get('/populatehistogram', wordDB.populate)
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
