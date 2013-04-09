@@ -10,7 +10,8 @@
     "jade": "*",
     "mongoose": "3.x",
     "jade": "*",
-    "wordpos": "*"
+    "wordpos": "*",
+    "rem": "*"
   },
   "engines": {
     "node": "0.8.x",
