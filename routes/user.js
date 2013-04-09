@@ -1,8 +1,19 @@
+models=require('../models')
+User=models.User;
 
-/*
- * GET users listing.
- */
-
-exports.list = function(req, res){
-  res.send("respond with a resource");
+exports.addNew=function(req,res){
+	user=new User();
+	user.name=req.params.name;
+	user.pass=req.params.pass;
+	user.wordScore=0;
+	user.save(function(err){
+		console.log(err);
+	})
 };
+
+exports.login=function(req,res){
+	User.find({}).execFind(function(err,user){
+		console.log(user)
+		req.sessions.user=user;
+	})
+}
