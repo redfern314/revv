@@ -10,8 +10,6 @@ var wordSchema=mongoose.Schema({
 var Word = mongoose.model('Word', wordSchema);
 
 
-
-
 exports.populate = function(req, res){
     fs.readFile('./words.txt', 'utf8',  function (err, data) {
         var wordfreq = data.split("\n");
@@ -31,14 +29,3 @@ exports.populate = function(req, res){
 }
 
 exports.Word=Word;
-
-
-var userSchema=mongoose.Schema({
-	name: String,
-	pass: String,
-	wordScore: Number
-});
-
-var User = mongoose.model('User',userSchema);
-
-exports.User=User;
