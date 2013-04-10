@@ -11,7 +11,9 @@ $(
             });
         } else if (window.location.pathname.indexOf("twitter.com") != -1) {
             $("body").keyup(function(event) {
-                console.log($(event.target.context.value));
+                text = $(event.target).context.value
+                console.log(text);
+                $.post('http://localhost:5000/synon',{text: text},showReplacements)
             });
         }
     }
