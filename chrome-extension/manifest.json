@@ -3,11 +3,13 @@
   "name": "Prolix",
   "description": "Finds replacements for common words in your social media posts!",
   "version": "1.0",
+  "background":{"scripts":["background.js"]},
   "content_scripts": [
     {
       "js": [
+
         "jquery.js",
-        "background.js"
+        "content.js"
       ],
       "matches": [
         "http://*/*",
@@ -16,6 +18,13 @@
     }
   ],
   "permissions": [
-    "tabs"
-  ]
+    "https://secure.flickr.com/",
+    "tabs",
+    "contextMenus"
+  ],
+  "page_action": {
+    "16": "icon-bitty.png",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  }
 }
