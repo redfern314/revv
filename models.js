@@ -28,4 +28,9 @@ exports.populate = function(req, res){
     res.send("Database population complete")
 }
 
+exports.lookup = function(req,res) {
+    console.log(req.body);
+    res.send("Test successful!");
+}
+
 exports.Word=Word;

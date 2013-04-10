@@ -1,9 +1,18 @@
-function isSocialMediaSite(tabID, changeInfo, tab) {
-    if (tab.url.indexOf("facebook.com") != -1) {
-        chrome.pageAction.show(tabID);
-    } else if (tab.url.indexOf("twitter.com") != -1) {
-        chrome.pageAction.show(tabID);
-    }
+var showReplacements = function(data) {
+        console.log(data);
 }
-
-chrome.tabs.onUpdated.addListener(isSocialMediaSite);
+$(
+    function(){
+        if (window.location.href.indexOf("facebook.com") != -1) {
+            $("body").keyup(function(event) {
+                text = $(event.target).context.value
+                console.log(text);
+                $.post('http://localhost:5000/lookup',{text: text},showReplacements)
+            });
+        } else if (window.location.pathname.indexOf("twitter.com") != -1) {
+            $("body").keyup(function(event) {
+                console.log($(event.target.context.value));
+            });
+        }
+    }
+);
