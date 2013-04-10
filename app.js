@@ -34,7 +34,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/synon/:text',synon.getSyns)
+app.post('/synon',synon.getSyns)
 // app.get('/login/:name/:pass',user.login)
 // app.post('/newUser/:name/:pass',user.addNew)
 app.get('/populatehistogram', wordDB.populate)

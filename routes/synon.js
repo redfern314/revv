@@ -9,7 +9,7 @@ Word=models.Word;
 
 
 exports.getSyns=function(req,res){
-	var text=req.params.text;
+	var text=req.body.text;
 	wordpos.getPOS(text, function(parts){
 		word=parts.adjectives[0]
 		console.log(word)
