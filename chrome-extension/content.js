@@ -6,10 +6,9 @@ var facebook = (window.location.href.indexOf("facebook.com") != -1);
 var twitter = (window.location.href.indexOf("twitter.com") != -1);
 var showReplacements = function(data) {
         console.log(data);
-        /*chrome.runtime.sendMessage(data, function(response) {
+        chrome.runtime.sendMessage(data, function(response) {
           console.log(response);
-        });*/
-        replaceWord("hello","goodbye");
+        });
 }
 
 var getMessageFromBackground = function(request, sender, sendResponse) {
