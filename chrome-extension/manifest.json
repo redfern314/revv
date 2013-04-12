@@ -8,7 +8,6 @@
     {
       "js": [
         "jquery.js",
-        "jquery-highlight/jquery.highlighttextarea.js",
         "content.js"
       ],
       "matches": [
