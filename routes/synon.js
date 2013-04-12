@@ -9,6 +9,12 @@ var wordpos = new WordPOS();
 
 Word=models.Word;
 
+exports.showDB=function(req,res){
+	Word.find({word: 'the'}).execFind(function(err,data){
+		res.send(data);
+	});
+}
+
 exports.getSyns=function(req,res){
 	clientWords={};
 	clientWords.words=[];
