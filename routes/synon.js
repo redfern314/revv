@@ -24,7 +24,7 @@ exports.getSyns=function(req,res){
 		Word.find({word: {$in: words}}).sort({freq: -1}).execFind(function(err,data){ //most common first
 			infreq=data.slice(0,10);
 			for(inf in infreq){
-				rest.get('http://www.dictionaryapi.com/api/v1/references/thesaurus/xml/'+infreq[inf].word+'?key=d470e80a-8345-4d13-86c2-31cf7a9fc005').on('complete',function (content){
+				rest.get('http://www.dictionaryapi.com/api/v1/references/thesaurus/xml/'+infreq[inf].word+'?key='+process.env.DICT_SECRET).on('complete',function (content){
 					parseDef(content);
 				});
 			}
