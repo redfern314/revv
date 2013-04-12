@@ -7,14 +7,21 @@ function contextMenuClicked(){
 
     // {"words": [ {"old": "big", "new": [ {"word": "huge", "def": "extremely large"}, {"word": "vast", "def": "very large; wide in range"} ] } ] }
 
-function replaceword(info, tab, o){
+function replaceword(info, tab){
     console.log("Lets replace some words!");
-    console.log(info);
     var pair = info.menuItemId.split("_");
     chrome.tabs.sendMessage(tabid, {message: "replace", oldword: pair[0], newword: pair[1]}, function(response) {
-    console.log(response);
-  });
+        console.log(response);  
+    });
 }
+
+function refresh(){
+    console.log("Refresh");
+    chrome.tabs.sendMessage(tabid, {message: "refresh"}, function(response) {
+        console.log(response);
+    })
+}
+
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     tabid = parseInt(sender.tab.id);
     chrome.contextMenus.removeAll()
@@ -38,11 +45,9 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
             
             chrome.contextMenus.create({type: "separator", parentId: oldword, contexts: ["editable"]})
 
-
-            var sendData = function(info, tab){replaceword(info, tab, betterword)}
             chrome.contextMenus.create({type: "normal", 
                 title: betterword, parentId: definition, id: oldword + "_" + betterword ,
-                contexts: ["editable"], onclick: sendData});
+                contexts: ["editable"], onclick: function (info, tab) {replaceword(info, tab)}});
             chrome.contextMenus.create({type: "separator", parentId: definition, contexts: ["editable"]})
             
         }     
@@ -51,7 +56,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 
     chrome.contextMenus.create({type: "separator", contexts: ["editable"]})
 
-    chrome.contextMenus.create({type: "normal", title: "Refresh", contexts: ["editable"], onclick: contextMenuClicked}, function(){})
+    chrome.contextMenus.create({type: "normal", title: "Refresh", contexts: ["editable"], onclick: refresh}, function(){})
     
 });
 
