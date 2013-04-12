@@ -3,6 +3,7 @@ var current_text = '';
 var current_area = null;
 var facebook = (window.location.href.indexOf("facebook.com") != -1);
 var twitter = (window.location.href.indexOf("twitter.com") != -1);
+var timeout = null;
 var showReplacements = function(data) {
         console.log(data);
         chrome.runtime.sendMessage(data, function(response) {
@@ -43,19 +44,27 @@ $(
             $("body").keyup(function(event) {
                 text = $(event.target).context.value
                 console.log(text);
-                console.log($(event.target).context)
                 current_text = text;
                 current_area = event.target;
-                $.post('http://prolix.herokuapp.com/synon',{text: text},showReplacements)
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+                timeout = setTimeout(function() {
+                    $.post('http://prolix.herokuapp.com/synon',{text: text},showReplacements)
+                }, 1000);
             });
         } else if (twitter) {
             $("body").keyup(function(event) {
                 text = $(event.target).context.textContent
                 console.log(text);
-                console.log($(event.target).context)
                 current_text = text;
                 current_area = event.target;
-                $.post('http://prolix.herokuapp.com/synon',{text: text},showReplacements)
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+                timeout = setTimeout(function() {
+                    $.post('http://prolix.herokuapp.com/synon',{text: text},showReplacements)
+                }, 1000);
             });
         }
     }
