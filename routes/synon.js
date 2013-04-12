@@ -58,9 +58,9 @@ exports.getSyns=function(req,res){
 							cWord.new[cWord.new.length]=replaceWord;
 						}
 						clientWords.words[clientWords.words.length]=cWord;
-						if(clientWords.words.length){
-							res.send(JSON.stringify(clientWords,null," "));
-						}
+
+						res.send(JSON.stringify(clientWords,null," "));
+
 					});
 
 					break;
