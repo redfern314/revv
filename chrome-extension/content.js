@@ -15,7 +15,7 @@ var getMessageFromBackground = function(request, sender, sendResponse) {
     console.log(request);
     if (request.message == "refresh") { // request = {message: "refresh"}
         sendResponse('Refresh request acknowledged')
-        $.post('http://localhost:5000/synon',{text: current_text},showReplacements);
+        $.post('http://prolix.herokuapp.com/synon',{text: current_text},showReplacements);
     } else if (request.message == "replace") { // request = {message: "replace", oldword: "big", newword: "huge"}
         replaceWord(request.oldword,request.newword);
     }
