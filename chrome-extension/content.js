@@ -6,7 +6,7 @@ var twitter = (window.location.href.indexOf("twitter.com") != -1);
 var timeout = null;
 var showReplacements = function(data) {
         console.log(data);
-        chrome.runtime.sendMessage(data, function(response) {
+        chrome.runtime.sendMessage({message:data}, function(response) {
           console.log(response);
         });
 }
