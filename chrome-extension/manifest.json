@@ -17,7 +17,7 @@
     }
   ],
   "permissions": [
-    "https://secure.flickr.com/",
+    "http://prolix.herokuapp.com/",
     "tabs",
     "contextMenus"
   ],

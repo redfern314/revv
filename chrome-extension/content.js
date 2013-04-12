@@ -46,7 +46,7 @@ $(
                 console.log($(event.target).context)
                 current_text = text;
                 current_area = event.target;
-                $.post('http://localhost:5000/synon',{text: text},showReplacements)
+                $.post('http://prolix.herokuapp.com/synon',{text: text},showReplacements)
             });
         } else if (twitter) {
             $("body").keyup(function(event) {
@@ -55,7 +55,7 @@ $(
                 console.log($(event.target).context)
                 current_text = text;
                 current_area = event.target;
-                $.post('http://localhost:5000/synon',{text: text},showReplacements)
+                $.post('http://prolix.herokuapp.com/synon',{text: text},showReplacements)
             });
         }
     }
