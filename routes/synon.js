@@ -52,15 +52,17 @@ exports.getSyns=function(req,res){
 						user_param=.6; //should multiply by orig. frequency.
 						ind=Math.round(synLookup.length*user_param);
 						//add new word to old word
-						for (var i=0;i<synLookup.length;i++){
-							var replaceWord={}
-							replaceWord.word=(synLookup[i].word)
-							cWord.new[cWord.new.length]=replaceWord;
+						for (var i=ind-3;i<(ind+3);i++){
+							if (synLookup[i]) {
+								var replaceWord={}
+								replaceWord.word=(synLookup[i].word)
+								cWord.new[cWord.new.length]=replaceWord;
+							}
 						}
 						clientWords.words[clientWords.words.length]=cWord;
-						
-						res.send(JSON.stringify(clientWords,null," "));
-						
+						if(clientWords.words.length>=infreq.length){
+							res.send(JSON.stringify(clientWords,null," "));
+						}
 					});
 
 					break;
