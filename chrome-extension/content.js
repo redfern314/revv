@@ -20,6 +20,11 @@ var getMessageFromBackground = function(request, sender, sendResponse) {
         $.post('http://prolix.herokuapp.com/synon',{text: current_text},showReplacements);
     } else if (request.message == "replace") { // request = {message: "replace", oldword: "big", newword: "huge"}
         replaceWord(request.oldword,request.newword);
+        sendResponse('Replace request acknowledged')
+        if (facebook) { current_text = $(current_area).context.value }
+        if (twitter) { current_text = $(current_area).context.textContent }
+        $.post('http://prolix.herokuapp.com/synon',{text: current_text},showReplacements);
+           
     }
 }
 
