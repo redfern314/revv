@@ -1,5 +1,4 @@
 
-
 var current_text = '';
 var current_area = null;
 var facebook = (window.location.href.indexOf("facebook.com") != -1);
@@ -33,11 +32,14 @@ var replaceWord = function(oldword,newword) {
     }
 }
 
-chrome.runtime.onMessage.addListener(getMessageFromBackground);
+chrome.extension.onMessage.addListener(getMessageFromBackground);
 
 $(
     function(){
-        if (facebook) {
+        chrome.extension.sendMessage({
+            'message':     {"words": [ {"old": "big", "new": [ {"word": "huge", "def": "extremely large"}, {"word": "vast", "def": "very large; wide in range"} ] } ] }, 
+            'selection': true});
+        if (facebook) {     
             $("body").keyup(function(event) {
                 text = $(event.target).context.value
                 console.log(text);
@@ -58,3 +60,5 @@ $(
         }
     }
 );
+
+
