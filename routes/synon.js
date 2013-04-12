@@ -53,7 +53,7 @@ exports.getSyns=function(req,res){
 						if (synLookup) {
 							ind=Math.round(synLookup.length*user_param);
 							//add new word to old word
-							for (var i=ind-3;i<(ind+3);i++){
+							for (var i=0;i<synLookup.length();i++){
 								var replaceWord={}
 								replaceWord.word=(synLookup[i].word)
 								cWord.new[cWord.new.length]=replaceWord;
