@@ -5,8 +5,8 @@ var facebook = (window.location.href.indexOf("facebook.com") != -1);
 var twitter = (window.location.href.indexOf("twitter.com") != -1);
 var timeout = null;
 var showReplacements = function(data) {
-        console.log(data);
-        chrome.runtime.sendMessage({message:data}, function(response) {
+        console.log(JSON.parse(data));
+        chrome.runtime.sendMessage({message:JSON.parse(data)}, function(response) {
           console.log(response);
         });
 }
@@ -14,6 +14,8 @@ var showReplacements = function(data) {
 var getMessageFromBackground = function(request, sender, sendResponse) {
     console.log(request);
     if (request.message == "refresh") { // request = {message: "refresh"}
+        if (facebook) { current_text = $(current_area).context.value }
+        if (twitter) { current_text = $(current_area).context.textContent }
         sendResponse('Refresh request acknowledged')
         $.post('http://prolix.herokuapp.com/synon',{text: current_text},showReplacements);
     } else if (request.message == "replace") { // request = {message: "replace", oldword: "big", newword: "huge"}
@@ -37,9 +39,6 @@ chrome.extension.onMessage.addListener(getMessageFromBackground);
 
 $(
     function(){
-        chrome.extension.sendMessage({
-            'message':     {"words": [ {"old": "big", "new": [ {"word": "huge", "def": "extremely large"}, {"word": "vast", "def": "very large; wide in range"} ] } ] }, 
-            'selection': true});
         if (facebook) {     
             $("body").keyup(function(event) {
                 text = $(event.target).context.value

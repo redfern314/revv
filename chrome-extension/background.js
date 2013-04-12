@@ -24,6 +24,7 @@ function refresh(){
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     tabid = parseInt(sender.tab.id);
+    console.log(request);
     chrome.contextMenus.removeAll()
     var oldword;
     var betterword;
@@ -37,16 +38,16 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     
         for (newword in words[word].new){
             betterword = words[word].new[newword].word
-            definition = words[word].new[newword].def
+            // definition = words[word].new[newword].def
             
-            chrome.contextMenus.create({type: "normal", 
-                title: definition, id: definition, parentId: oldword, 
-                contexts: ["editable"]});
+            // chrome.contextMenus.create({type: "normal", 
+            //     title: definition, id: definition, parentId: oldword, 
+            //     contexts: ["editable"]});
             
-            chrome.contextMenus.create({type: "separator", parentId: oldword, contexts: ["editable"]})
+
 
             chrome.contextMenus.create({type: "normal", 
-                title: betterword, parentId: definition, id: oldword + "_" + betterword ,
+                title: betterword, parentId: oldword, id: oldword + "_" + betterword ,
                 contexts: ["editable"], onclick: function (info, tab) {replaceword(info, tab)}});
             chrome.contextMenus.create({type: "separator", parentId: definition, contexts: ["editable"]})
             
